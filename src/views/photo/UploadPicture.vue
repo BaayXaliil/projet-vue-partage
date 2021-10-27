@@ -9,15 +9,15 @@
       </div>
       <div class="content_right">
         <md-button>
-          <img src="../assets/icons/description_black_24dp.svg" alt="" />
+          <img src="../../assets/icons/description_black_24dp.svg" alt="" />
           <span>Aide</span>
         </md-button>
         <md-button class="ml-12" @click="removeImage">
-          <img src="../assets/icons/highlight_off_black_24dp.svg" alt="" />
+          <img src="../../assets/icons/highlight_off_black_24dp.svg" alt="" />
           <span>Annuler</span>
         </md-button>
         <md-button class="ml-12 valide" @click="valider">
-          <img src="../assets/icons/save_alt_black_24dp.svg" alt="" />
+          <img src="../../assets/icons/save_alt_black_24dp.svg" alt="" />
           <span>valide</span>
         </md-button>
       </div>
