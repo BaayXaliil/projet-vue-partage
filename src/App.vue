@@ -312,7 +312,6 @@ export default {
     "Noto Color Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   height: 100vh;
   margin: 0;
@@ -322,6 +321,7 @@ export default {
   text-decoration: none;
   transition: 0.2s linear;
   box-sizing: border-box;
+  text-align: start;
 }
 .navigation_item .link {
   text-decoration: none !important;

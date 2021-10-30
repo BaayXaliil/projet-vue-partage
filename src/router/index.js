@@ -19,10 +19,14 @@ const routes = [
     path: '/upload-photo',
     component: () => import('../views/photo/UploadPicture.vue')
   },
-  // {
-  //   path: '/search-photo',
-  //   component: () => import('../views/photo/SearchPhoto.vue')
-  // }
+  {
+    path: '/search-photo',
+    component: () => import('../views/photo/SearchPhoto.vue')
+  },
+  {
+    path: '/details-picture',
+    component: () => import('../views/photo/DetailsPicture.vue')
+  }
 ]
 
 const router = new VueRouter({
