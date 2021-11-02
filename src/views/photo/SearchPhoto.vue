@@ -44,9 +44,12 @@
                 />
                 <div class="texte">Couleur dominante</div>
               </div>
-              <md-switch v-model="isInfinity"></md-switch>
+              <md-switch v-model="switchColor" class="md-primary"></md-switch>
             </div>
-            <div class="choix_couleur"></div>
+            <div class="choix_couleur">
+              <!-- <sketch-picker :value="colors" @input="updateValue"></sketch-picker> -->
+              <chrome-picker v-model="colors" @input="updateValue" />
+            </div>
           </div>
           <div class="drawer_item">
             <span>
@@ -72,7 +75,7 @@
                 <img src="../../assets/icons/groups_black_24dp.svg" alt="" />
                 <div class="texte">Personne</div>
               </div>
-              <md-switch v-model="isInfinity"></md-switch>
+              <md-switch v-model="switchPerson" class="md-primary"></md-switch>
             </div>
           </div>
           <div class="drawer_item">
@@ -84,24 +87,133 @@
                 />
                 <div class="texte">Contenu centrè</div>
               </div>
-              <md-switch v-model="isInfinity"></md-switch>
+              <md-switch v-model="switchContenu" class="md-primary"></md-switch>
             </div>
           </div>
         </div>
       </div>
-      <div class="drawer_content"></div>
+      <div class="drawer_content">
+        <div class="flex h-full">
+          <div class="grid">
+            <div v-for="(image, index) in images" :key="index" class="flex">
+              <div class="flex_1">
+                <!-- Bloc a montrer lors la souris survole l'image -->
+                <div class="flex_2">
+                  <a class="flex_2_image" target="_blank" rel="noreferrer">
+                    <div class="image">
+                      <img
+                        :src="image.img"
+                        :class="'image'+index"
+                      />
+                    </div>
+                  </a>
+                </div>
+                <div class="flex_3 rounded">
+                  <div class="buttons">
+                    <div>
+                      <md-button class="md-icon-button" :class="{'md-primary': image.like}"  @click="like(index)">
+                        <md-icon>favorite</md-icon>
+                      </md-button>
+                      <md-tooltip md-direction="left">aimer</md-tooltip>
+                    </div>
+                    <div>
+                      <md-button class="md-icon-button md-succes">
+                        <md-icon>share</md-icon>
+                      </md-button>
+                      <md-tooltip md-direction="left">partager</md-tooltip>
+                    </div>
+                  </div>
+                </div>
+                <!-- Bloc infos au bas des images -->
+                <div class="flex_4">
+                  <div class="flex">
+                    <md-button class="button_primary">
+                      <md-icon>add_shopping_cart</md-icon>
+                      <span>Ajouter au panier</span>
+                    </md-button>
+                  </div>
+                  <div class="flex">
+                    <md-button @click="downloadImage(index)">
+                      <md-icon>download</md-icon>
+                      <span>{{ image.download }}</span>
+                    </md-button>
+                    <md-button class="like">
+                      <md-icon>favorite</md-icon>
+                      <span>{{ image.likes }}</span>
+                    </md-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Chrome } from "vue-color";
+import { Sketch } from "vue-color";
+let FileSaver = require("file-saver");
+
+
+const images = [
+  { img: "babashot/coffee-beans-6603499_1280.jpg", download: 1215, likes: 2500, like: true },
+  { img: "babashot/rabbits-4890861_1280.jpg", download: 615, likes: 2133, like: true },
+  { img: "babashot/coffee-beans-6603499_1280.jpg", download: 435, likes: 1243, like: true },
+  { img: "babashot/street-6099209_1920.jpg", download: 123, likes: 8000, like: true },
+  { img: "babashot/yellow-macaw-6607739_640.jpg", download: 897, likes: 867, like: true },
+  { img: "babashot/waterfalls-6476336_1280.jpg", download: 15, likes: 55, like: true },
+  { img: "babashot/rabbits-4890861_1280.jpg", download: 125, likes: 213, like: true },
+  { img: "babashot/bird-6602049_1280.jpg", download: 150, likes: 233, like: true },
+  { img: "babashot/waterfalls-6476336_1280.jpg", download: 1655, likes: 433, like: true },
+  { img: "babashot/yellow-macaw-6607739_640.jpg", download: 15, likes: 765, like: true },
+  { img: "babashot/street-6099209_1920.jpg", download: 45, likes: 765, like: true },
+  { img: "babashot/street-6099209_1920.jpg", download: 15, likes: 934, like: true },
+  { img: "babashot/waterfalls-6476336_1280.jpg", download: 15, likes: 321, like: true },
+  { img: "babashot/yellow-macaw-6607739_640.jpg", download: 8500, likes: 10000, like: true },
+  { img: "babashot/street-6099209_1920.jpg", download: 435, likes: 653, like: true },
+  { img: "babashot/yellow-macaw-6607739_640.jpg", download: 678, likes: 764, like: true },
+];
 export default {
   name: "SearchPhoto",
+  components: {
+    "sketch-picker": Sketch,
+    "chrome-picker": Chrome,
+  },
   data: () => ({
+    images,
     drawerVisible: false,
     trie: "",
     isInfinity: false,
+    switchColor: false,
+    switchPerson: false,
+    switchContenu: false,
+    colors: "#194d33",
   }),
+  created: {
+
+  },
+  methods: {
+    updateValue() {
+      console.log(this.colors);
+    },
+    downloadImage(numero) {
+      let img = document.querySelector('.image'+numero);
+      let imgPath = img.getAttribute("src");
+      let filename = imgPath.substring(imgPath.lastIndexOf("/") + 1);
+      saveAs(imgPath, filename);
+      this.images[numero].download++
+    },
+    like(numero) {
+      if (this.images[numero].like) {
+        this.images[numero].likes--;
+      } else
+        this.images[numero].likes++;
+      this.images[numero].like = !this.images[numero].like; 
+    }
+  },
 };
 </script>
 <style scoped>
@@ -141,11 +253,13 @@ input::placeholder {
 .content_body {
   margin: 16px -16px;
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
-.content_body .drawer {
-  width: 230px;
+.drawer {
+  width: 35rem !important;
   background: white !important;
-  height: 100px;
+  min-width: 20rem;
 }
 .drawer {
   display: block;
@@ -160,6 +274,7 @@ input::placeholder {
   background-color: white;
   color: #1e293b;
   border-right: solid 1px #e2e8f0;
+  height: auto !important;
 }
 .drawer .header {
   padding: 12px;
@@ -186,7 +301,8 @@ input::placeholder {
 }
 
 .content_body .drawer.hidden {
-  /* display: none !important; */
+  display: none !important;
+  min-width: 0;
   width: 0 !important;
   transition: width 0.1s;
 }
@@ -298,6 +414,10 @@ input::placeholder {
   justify-content: space-between;
   align-items: flex-end;
 }
+.choix_couleur .vc-chrome {
+  width: 100%;
+  margin: 1rem 0 0;
+}
 .choix .content_left {
   display: flex;
   align-items: end;
@@ -310,6 +430,76 @@ input::placeholder {
   padding-left: 12px;
 }
 
+.drawer_content {
+  width: fit-content;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-gap: 0.75rem;
+  gap: 0.75rem;
+}
+
+.flex {
+  position: relative;
+  display: flex;
+}
+.flex_1 {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 10%);
+  min-width: 275px;
+}
+
+.flex_3 {
+  position: absolute;
+  top: 18%;
+  left: 92%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  opacity: 0;
+}
+.buttons {
+  width: 40px !important;
+}
+.buttons .md-icon-button {
+  margin: 0;
+}
+.md-succes .md-icon {
+  color: #4ade80;
+}
+.like .md-icon {
+  color: #60a5fa;
+}
+.flex_4 .md-button {
+  border-radius: 2rem;
+  margin: 0;
+  font-size: 12px;
+  min-width: 30px;
+}
+.button_primary {
+  color: #4f46e5;
+  text-transform: capitalize;
+}
+.button_primary .md-icon {
+  color: #4f46e5;
+}
+.rounded {
+  border-radius: 0.25rem !important;
+}
+.flex_1:hover .flex_3 {
+  opacity: 1 !important;
+}
+.flex_4 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+}
 .md-switch {
   margin: 0;
 }
@@ -318,9 +508,26 @@ input::placeholder {
   padding-left: 8px;
   font-weight: 700;
 }
-@media (min-width: 600px) {
+@media  (min-width: 1155px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 700px) {
   .drawer {
-    width: 25rem !important;
+    width: 35rem !important;
+    min-width: 25rem;
+  }
+}
+@media (max-width: 610px) {
+  .content_body {
+    flex-direction: column;
+  }
+  .drawer {
+    width: 100% !important;
+  }
+  .drawer_content {
+    margin-top: 16px;
   }
 }
 </style>
