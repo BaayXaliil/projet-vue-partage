@@ -101,7 +101,7 @@
                   <md-menu-item>
                     <div class="item_wrapper">
                       <div class="item_icon">
-                        <img src="./assets/flags/US.svg" alt="">
+                        <img src="./assets/flags/US.svg" alt="" />
                       </div>
                       <div class="item_title">
                         <span>Anglais</span>
@@ -111,7 +111,7 @@
                   <md-menu-item>
                     <div class="item_wrapper">
                       <div class="item_icon">
-                        <img src="./assets/flags/TR.svg" alt="">
+                        <img src="./assets/flags/TR.svg" alt="" />
                       </div>
                       <div class="item_title">
                         <span>Turquie</span>
@@ -140,12 +140,121 @@
           </div>
           <div class="option_item">
             <div class="option_icon">
-              <md-button class="md-icon-button">
-                <img
-                  src="./assets/icons/bookmark_border_black_24dp.svg"
-                  alt=""
-                />
-              </md-button>
+              <md-menu md-size="auto" :md-offset-x="-320" :md-offset-y="0">
+                <md-button class="md-icon-button" md-menu-trigger>
+                  <img src="./assets/icons/bookmark_border_black_24dp.svg" />
+                </md-button>
+
+                <md-menu-content>
+                  <div class="header">
+                    <div class="header_content_left">
+                      <span>Shortcuts (12)</span>
+                    </div>
+                    <div class="header_content_right">
+                      <span>
+                        <md-button class="md-icon-button">
+                          <md-icon class="fa fa-pencil-square-o"></md-icon>
+                        </md-button>
+                      </span>
+                      <span>
+                        <md-button class="md-icon-button">
+                          <md-icon class="fa fa-plus-circle"></md-icon>
+                        </md-button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="menu_items">
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-pie-chart"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Tableau de bord</div>
+                        <div class="item_subtitle">Statistiques Globales</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon>home</md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Home</div>
+                        <div class="item_subtitle">Ecran d'accueil</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-user"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Contact Us</div>
+                        <div class="item_subtitle">Contacter le service</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/about" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-building"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">À propos</div>
+                        <div class="item_subtitle">Nos services</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/search-photo" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon>search</md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Rechercher des images</div>
+                        <div class="item_subtitle">Espace de recherche</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/details-picture" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-cog"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Détails image</div>
+                        <div class="item_subtitle">Prévisualisation d'une image</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-pie-chart"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Tableau de bord</div>
+                        <div class="item_subtitle">Statistiques Globales</div>
+                      </router-link>
+                    </md-menu-item>
+                    <md-menu-item class="border-b border-r">
+                      <router-link to="/" class="item">
+                        <div class="item_icon">
+                          <md-button class="md-icon-button md-raised" disabled>
+                            <md-icon class="fa fa-pie-chart"></md-icon>
+                          </md-button>
+                        </div>
+                        <div class="item_title">Tableau de bord</div>
+                        <div class="item_subtitle">Statistiques Globales</div>
+                      </router-link>
+                    </md-menu-item>
+                  </div>
+                </md-menu-content>
+              </md-menu>
             </div>
           </div>
           <div class="option_item">
@@ -260,27 +369,6 @@
             </div>
           </div>
         </div>
-        <!-- <md-list>
-          <md-list-item>
-            <md-icon>move_to_inbox</md-icon>
-            <span class="md-list-item-text">Inbox</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>delete</md-icon>
-            <span class="md-list-item-text">Trash</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>error</md-icon>
-            <span class="md-list-item-text">Spam</span>
-          </md-list-item>
-        </md-list> -->
       </md-app-drawer>
 
       <md-app-content>
@@ -312,6 +400,7 @@ export default {
     "Noto Color Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   color: #2c3e50;
   height: 100vh;
   margin: 0;
@@ -325,6 +414,7 @@ export default {
 }
 .navigation_item .link {
   text-decoration: none !important;
+  text-align: center;
 }
 .md-title {
   font-size: 14px !important;
@@ -336,6 +426,89 @@ export default {
 }
 .md-ripple:hover {
   background-color: #f2f4f6 !important;
+}
+
+.md-menu-content-bottom-start.md-menu-content {
+  min-width: 22.5rem;
+  border-radius: 1rem !important;
+  width: 22.5rem;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 30rem;
+}
+.md-menu-content-container .md-list {
+  padding: 0 !important;
+  position: relative;
+}
+
+.md-menu-content-container .header {
+  padding: 1rem 1rem 1rem 1.6rem !important;
+  background: #4f46e5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+.header .header_content_left {
+  line-height: 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+.header .header_content_right {
+  margin-left: auto;
+}
+.header_content_right .md-button {
+  margin: 0;
+}
+.header_content_right .md-icon-button .md-icon {
+  color: #fff !important;
+}
+.header_content_right .md-button .md-ripple:hover {
+  background-color: transparent !important;
+}
+
+.md-menu-content-container .md-list .menu_items {
+  display: grid !important;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 72px;
+}
+.menu_items .md-list-item-content {
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.menu_items .item {
+  text-align: center;
+  text-decoration: none;
+}
+.menu_items .item.router-link-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.menu_items .item .item_icon .md-button {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0 0.75rem;
+}
+.menu_items .item .item_title {
+  font-weight: 500;
+  font-size: 14px !important;
+}
+.menu_items .item .item_subtitle {
+  font-size: 13px;
+  color: #64748b;
 }
 
 .navigation-orizontale .navigation_item {
@@ -493,7 +666,19 @@ export default {
 .mb-4 {
   margin-bottom: 4px;
 }
+.md-raised {
+  background-color: #f1f5f9 !important;
+}
+.border-b {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+.border-l {
+  border-left: 1px solid #e2e8f0 !important;
+}
 
+.border-r {
+  border-right: 1px solid #e2e8f0 !important;
+}
 @media (max-width: 974px) {
   .md-app-toolbar .md-button.menu {
     display: inline-block;
@@ -507,7 +692,7 @@ export default {
 }
 @media screen and (max-width: 440px) {
   .md-app-toolbar {
-  padding: 0 !important;
-}
+    padding: 0 !important;
+  }
 }
 </style>
